@@ -271,8 +271,13 @@ function getMovingSum(/* arr */) {
  * [ 'a', 'b', 'c' , null ]  => [ "b", null ]
  * [ "a" ] => []
  */
-function getSecondItems(/* arr */) {
-  throw new Error('Not implemented');
+function getSecondItems(arr) {
+  return arr.reduce((acc, value, index) => {
+    if (arr.length > 1) {
+      if ((index + 1) % 2 === 0) acc.push(value);
+    }
+    return acc;
+  }, []);
 }
 
 
@@ -290,8 +295,22 @@ function getSecondItems(/* arr */) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  return arr.reduce((acc, value, index) => {
+    let rep = [];
+    if (value == null) {
+      rep = 'null '.repeat(index + 1).split(' ');
+      rep.pop();
+      rep = rep.reduce((ac) => {
+        ac.push(null);
+        return ac;
+      }, []);
+    } else {
+      rep = String(value).repeat(index + 1).split('');
+    }
+    acc.push(rep);
+    return acc.flat();
+  }, []);
 }
 
 
@@ -308,8 +327,8 @@ function propagateItemsByPositionIndex(/* arr */) {
  *   [ 1,2,3,4,5,6,7,8,9,10 ] => [ 10, 9, 8 ]
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
-function get3TopItems(/* arr */) {
-  throw new Error('Not implemented');
+function get3TopItems(arr) {
+  return arr.slice(-3).reverse();
 }
 
 
@@ -326,8 +345,12 @@ function get3TopItems(/* arr */) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getPositivesCount(arr) {
+  return arr.reduce((acc, value) => {
+    let num = 0;
+    if (typeof value === 'number' && value > 0) num = 1;
+    return acc + num;
+  }, 0);
 }
 
 /**
