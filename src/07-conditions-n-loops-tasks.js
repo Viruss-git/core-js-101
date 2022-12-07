@@ -43,8 +43,12 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  let factorial = 1;
+  for (let i = 1; i <= n; i += 1) {
+    factorial *= i;
+  }
+  return factorial;
 }
 
 
@@ -84,8 +88,17 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  const arrSumm = [a + b, a + c, b + c];
+  const arr = [a, b, c];
+  for (let i = 0; i < 3; i += 1) {
+    for (let n = 0; n < 3; n += 1) {
+      if (arr[i] >= arrSumm[n]) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 
@@ -298,8 +311,22 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  let brackets = str;
+  const arrStartEndBrackets = ["''", '[]', '{}', '()', '<>'];
+  if (brackets.length % 2 === 0) {
+    for (let i = 0; i < arrStartEndBrackets.length; i += 1) {
+      if (brackets.includes(arrStartEndBrackets[i])) {
+        brackets = brackets.replace(arrStartEndBrackets[i], '');
+        i = -1;
+      }
+    }
+    if (brackets) {
+      return false;
+    }
+    return true;
+  }
+  return false;
 }
 
 
